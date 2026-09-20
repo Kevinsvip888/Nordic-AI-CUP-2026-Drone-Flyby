@@ -7,6 +7,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_SUFFIXES = {'.env', '.key', '.pem', '.pt', '.pth', '.onnx', '.engine',
                       '.zip', '.png', '.jpg', '.jpeg', '.log'}
+ALLOWED_ASSETS = {'docs/assets/aerogaze-predictions.jpg'}
 SECRET_PATTERNS = {
     'private key': rb'-----BEGIN [A-Z ]*PRIVATE KEY-----',
     'GitHub token': rb'(?:ghp_|github_pat_)[A-Za-z0-9_]{20,}',
@@ -17,13 +18,16 @@ SECRET_PATTERNS = {
 }
 
 
-def staged_files() -> list[Path]:
-    raw = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT)
+def release_files() -> list[Path]:
+    raw = subprocess.check_output(
+        ['git', 'ls-files', '--cached', '--others', '--exclude-standard', '-z'],
+        cwd=ROOT,
+    )
     return [ROOT / item.decode('utf8') for item in raw.split(b'\0') if item]
 
 
 def main() -> None:
-    files = staged_files()
+    files = release_files()
     if not files:
         raise SystemExit('No staged source files found')
     failures = []
@@ -32,11 +36,17 @@ def main() -> None:
         if not path.is_file():
             failures.append(f'{relative}: not a regular file')
             continue
-        if path.suffix.lower() in FORBIDDEN_SUFFIXES or path.name == '.env':
+        is_allowed_asset = relative in ALLOWED_ASSETS
+        if ((path.suffix.lower() in FORBIDDEN_SUFFIXES and not is_allowed_asset)
+                or path.name == '.env'):
             failures.append(f'{relative}: forbidden release file type')
         data = path.read_bytes()
         if len(data) > 1_000_000:
             failures.append(f'{relative}: file exceeds 1 MB')
+        if is_allowed_asset:
+            if not data.startswith(b'\xff\xd8\xff'):
+                failures.append(f'{relative}: expected a JPEG asset')
+            continue
         try:
             data.decode('ascii')
         except UnicodeDecodeError:
@@ -46,7 +56,7 @@ def main() -> None:
                 failures.append(f'{relative}: matched {label}')
     if failures:
         raise SystemExit('\n'.join(failures))
-    print(f'PASS: {len(files)} staged files contain ASCII source only and no known private-data patterns')
+    print(f'PASS: {len(files)} tracked release files passed source, asset, and privacy checks')
 
 
 if __name__ == '__main__':
