@@ -1,0 +1,10 @@
+{
+  "cpu_tests_passed": 11,
+  "offline_replay_frames": 248,
+  "outputs_commands_diagnostics_exact": true,
+  "package_build_and_verify": "PASS with a local checkpoint; generated build ignored",
+  "public_release_audit": "PASS: 32 staged ASCII source files; no known private-data patterns, models, datasets, archives or oversized files",
+  "mit_license_present": true,
+  "official_validation_run": false,
+  "service_started": false
+}
