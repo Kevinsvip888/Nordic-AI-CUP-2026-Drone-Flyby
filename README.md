@@ -48,7 +48,7 @@ The serving configuration uses CUDA device 0 and FP16; CPU-only inference is not
 
 ## Build and run locally
 
-Obtain the final L0 E50 checkpoint separately and place it at `weights/model.pt`. The builder checks its expected SHA256 and refuses to overwrite an existing output directory.
+Download the final L0 E50 checkpoint from [AeroGaze YOLO26-L on Hugging Face](https://huggingface.co/Invisible-dog/aerogaze-yolo26l) and place it at `weights/model.pt`. The builder checks its expected SHA256 and refuses to overwrite an existing output directory.
 
 ```sh
 python tools/build_package.py --checkpoint weights/model.pt --output build/participant
