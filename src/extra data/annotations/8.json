@@ -1,0 +1,131 @@
+{
+  "frame": 0,
+  "pose": {
+    "x": 0,
+    "y": 0,
+    "z": -600
+  },
+  "annotations": [
+    {
+      "object_id": "hangar",
+      "bbox": [
+        2277.555538,
+        61.401877,
+        2479.19059,
+        288.820875
+      ]
+    },
+    {
+      "object_id": "helicopter",
+      "bbox": [
+        3727.5,
+        0,
+        3836.5,
+        86.5
+      ]
+    },
+    {
+      "object_id": "jammer",
+      "bbox": [
+        1217.423309,
+        2060.479269,
+        1258.875414,
+        2109.943486
+      ]
+    },
+    {
+      "object_id": "jet_plane",
+      "bbox": [
+        1756,
+        110.5,
+        1832,
+        190.5
+      ]
+    },
+    {
+      "object_id": "large_launcher",
+      "bbox": [
+        3663.239117,
+        1081.08564,
+        3828.850855,
+        1225.619064
+      ]
+    },
+    {
+      "object_id": "medium_launcher",
+      "bbox": [
+        1226.164723,
+        1598.794991,
+        1284.434838,
+        1655.650893
+      ]
+    },
+    {
+      "object_id": "medium_launcher",
+      "bbox": [
+        514.053461,
+        1458.998639,
+        574.891633,
+        1518.641467
+      ]
+    },
+    {
+      "object_id": "small_plane",
+      "bbox": [
+        495,
+        600.5,
+        536,
+        648.5
+      ]
+    },
+    {
+      "object_id": "mine_roller",
+      "bbox": [
+        1361.5,
+        283.5,
+        1414.5,
+        343.5
+      ]
+    },
+    {
+      "object_id": "small_launcher",
+      "bbox": [
+        2959.5,
+        109.5,
+        2979.5,
+        139.5
+      ]
+    },
+    {
+      "object_id": "small_tower",
+      "bbox": [
+        1972,
+        1906,
+        2025,
+        1966
+      ]
+    },
+    {
+      "object_id": "ta-ta",
+      "bbox": [
+        2055.5,
+        1450.5,
+        2084.5,
+        1469.5
+      ]
+    }
+  ],
+  "object_counts": {
+    "hangar": 1,
+    "helicopter": 1,
+    "jammer": 1,
+    "jet_plane": 1,
+    "large_launcher": 1,
+    "medium_launcher": 2,
+    "mine_roller": 1,
+    "small_launcher": 1,
+    "small_plane": 1,
+    "small_tower": 1,
+    "ta-ta": 1
+  }
+}

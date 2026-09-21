@@ -1,0 +1,9 @@
+{
+  "CHANGELOG.md": "73bcc20a96c9dc0737d33799c3314aa5395b79ae4765f6a4e0a45b30c8055133",
+  "README.md": "39ff6a2deea39ee008a011eb1b0bb40bcbf68343e75c130b136e7c68e2aff2a3",
+  "dist\\app.js": "eab1f33ddb6fe9ac081675513c02578e00543de97eb7887bab2eddc96f2bb72f",
+  "dist\\index.html": "3a0bb9f446c548360802836e8260ce09b2e3ebe81f76f7468c3312e97bc0eb71",
+  "dist\\styles.css": "9f1ebd140bd1d422f08e9d3fb8440f0ea53a691506d7e7291abc5602545e4c4e",
+  "dist\\usability.css": "3edb2d4daf8bd25c1e5859d5785097be6dff53c6da20f22092206369a9c461c8",
+  "tests\\regression.cjs": "6d4ccea9a0cdd229307c85fb1e491dc42425bf4b026dd18135f62f0178b4fd7c"
+}

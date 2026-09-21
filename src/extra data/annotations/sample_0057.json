@@ -1,0 +1,131 @@
+{
+  "frame": 0,
+  "pose": {
+    "x": 0,
+    "y": 0,
+    "z": -600
+  },
+  "annotations": [
+    {
+      "object_id": "helicopter_1",
+      "bbox": [
+        2197,
+        667,
+        2298,
+        744
+      ]
+    },
+    {
+      "object_id": "helicopter_1",
+      "bbox": [
+        1138,
+        898,
+        1239,
+        975
+      ]
+    },
+    {
+      "object_id": "jet_plane_1",
+      "bbox": [
+        1891,
+        1661,
+        1937,
+        1712
+      ]
+    },
+    {
+      "object_id": "tank_1",
+      "bbox": [
+        2763,
+        1531,
+        2800,
+        1565
+      ]
+    },
+    {
+      "object_id": "small_tower_1",
+      "bbox": [
+        2624,
+        436,
+        2668,
+        482
+      ]
+    },
+    {
+      "object_id": "small_plane_1",
+      "bbox": [
+        3457,
+        907,
+        3491,
+        948
+      ]
+    },
+    {
+      "object_id": "small_plane_2",
+      "bbox": [
+        3529,
+        1018,
+        3563,
+        1059
+      ]
+    },
+    {
+      "object_id": "medium_launcher_1",
+      "bbox": [
+        2877,
+        1695,
+        2901,
+        1720
+      ]
+    },
+    {
+      "object_id": "medium_launcher_2",
+      "bbox": [
+        3378,
+        780,
+        3402,
+        805
+      ]
+    },
+    {
+      "object_id": "hangar_1",
+      "bbox": [
+        1159,
+        1046,
+        1355,
+        1192
+      ]
+    },
+    {
+      "object_id": "large_launcher_1",
+      "bbox": [
+        1021,
+        693,
+        1134,
+        765
+      ]
+    },
+    {
+      "object_id": "large_tower_1",
+      "bbox": [
+        2393,
+        248,
+        2450,
+        310
+      ]
+    }
+  ],
+  "object_counts": {
+    "hangar_1": 1,
+    "helicopter_1": 2,
+    "jet_plane_1": 1,
+    "large_launcher_1": 1,
+    "large_tower_1": 1,
+    "medium_launcher_1": 1,
+    "medium_launcher_2": 1,
+    "small_plane_1": 1,
+    "small_plane_2": 1,
+    "small_tower_1": 1,
+    "tank_1": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "original_composer_files_verified_unchanged": 7,
+  "original_pngs_verified_unchanged": 16,
+  "opaque_source_pixel_checks": 16,
+  "source_annotation_correspondence_checks": 16,
+  "source_placement_bbox_checks": 16,
+  "regression_checks_passed": 32,
+  "browser_visual_qa": "not completed: file URL blocked by browser security policy; no workaround attempted",
+  "new_composer_files": {
+    "dist\\app.js": "253ee9cd8ddac91c2f4c3749ef4fa5891404bb01b8d42ffa18ecc438f8a38617",
+    "dist\\index.html": "7afae928827375749d85bd093ffb11feab2d87fc68791175b7687ee0a22ddad9",
+    "dist\\sprite-box-calibration.js": "21b5a81710184348f9ca256b68dcf67f13b65ac21dc923abf9cacd24ff59bf89",
+    "dist\\sprite-box-calibration.json": "91f908effe93c2b89f888a24adb7e95ef80efa0fa4a29f667bf467a57dd8be10",
+    "dist\\styles.css": "9f1ebd140bd1d422f08e9d3fb8440f0ea53a691506d7e7291abc5602545e4c4e",
+    "dist\\usability.css": "3edb2d4daf8bd25c1e5859d5785097be6dff53c6da20f22092206369a9c461c8"
+  },
+  "source_inputs_remain_in_original_objects_directory": true
+}

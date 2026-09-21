@@ -1,0 +1,22 @@
+{
+  "frame": 0,
+  "pose": {
+    "x": 0,
+    "y": 0,
+    "z": -600
+  },
+  "annotations": [
+    {
+      "object_id": "large_launcher",
+      "bbox": [
+        6,
+        950,
+        126,
+        1084
+      ]
+    }
+  ],
+  "object_counts": {
+    "large_launcher": 1
+  }
+}

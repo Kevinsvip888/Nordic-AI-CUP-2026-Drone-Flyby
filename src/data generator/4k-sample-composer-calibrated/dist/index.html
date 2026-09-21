@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="在浏览器本地合成 4K 图像并导出边界框 JSON。" />
+  <title>4K 样本合成器 · 标注校准版</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b1018'/%3E%3Cpath d='M7 9h7M7 9v7M25 9h-7M25 9v7M7 23h7M7 23v-7M25 23h-7M25 23v-7' fill='none' stroke='%2336d6c7' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23ff9f43'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="usability.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span></div>
+      <div><h1>4K 样本合成器 · 标注校准版</h1><p>本地处理 · 3840 × 2160 · bbox 标注</p></div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="undoBtn" title="撤销 (Ctrl+Z)" aria-label="撤销" disabled>↶</button>
+      <button class="icon-btn" id="redoBtn" title="重做 (Ctrl+Shift+Z)" aria-label="重做" disabled>↷</button>
+      <span class="divider"></span>
+      <button class="btn ghost" id="newBtn">清空画布</button>
+      <label class="btn secondary" for="jsonInput">导入 JSON</label>
+      <input id="jsonInput" type="file" accept="application/json,.json" />
+      <button class="btn secondary" id="pngBtn" disabled>导出 PNG</button>
+      <button class="btn secondary" id="jsonBtn" disabled>导出 JSON</button>
+      <button class="btn primary" id="zipBtn" disabled><span>↓</span> 导出 ZIP</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="panel assets-panel">
+      <div class="panel-head">
+        <div><h2>素材库</h2><p><span id="assetCount">0</span> / 16 个 PNG</p></div>
+        <label class="upload-mini" title="添加 PNG 素材">＋<input id="assetInput" type="file" accept="image/png" multiple /></label>
+      </div>
+      <div id="assetDrop" class="drop-zone compact">
+        <div class="drop-icon">PNG</div>
+        <strong>导入透明物体</strong>
+        <span>一次可选多张，最多 16 张</span>
+        <label class="btn secondary small">选择 PNG<input id="assetInputEmpty" type="file" accept="image/png" multiple /></label>
+      </div>
+      <div id="assetGrid" class="asset-grid" aria-live="polite"></div>
+      <p class="panel-tip">点击素材添加到中心，或直接拖到画布。</p>
+      <p class="panel-tip" id="calibrationStatus">导入原 objects 中的 PNG，将自动使用已校准标注框。原图像素不变。</p>
+      <button class="btn secondary" id="changeBackgroundBtn">选择 / 更换背景</button>
+      <label class="field"><span>物体列表</span><select id="objectList" aria-label="物体列表"></select></label>
+      <p class="panel-tip">方向键微调 · Shift 加速 · Ctrl/Cmd+Z 撤销。刷新页面前请导出；尚不支持保存完整工程。</p>
+    </aside>
+
+    <section class="stage-wrap">
+      <div class="stage-toolbar">
+        <div class="status-group">
+          <span id="bgStatus" class="status-pill waiting"><i></i> 等待背景图</span>
+          <span id="objectStatus" class="meta">0 个实例</span>
+          <div class="mode-switch" aria-label="编辑模式">
+            <button id="objectModeBtn" class="active">物体</button>
+            <button id="backgroundModeBtn" disabled>背景</button>
+          </div>
+        </div>
+        <div class="zoom-group" title="仅改变编辑视图，不影响导出"><button id="zoomOut" aria-label="缩小视图">−</button><span id="zoomValue">视图：适应</span><button id="zoomIn" aria-label="放大视图">＋</button><button id="fitBtn">适应</button></div>
+      </div>
+      <div id="stageScroll" class="stage-scroll">
+        <div id="canvasShell" class="canvas-shell">
+          <canvas id="canvas" width="3840" height="2160" aria-label="4K 样本编辑画布"></canvas>
+          <div id="emptyCanvas" class="canvas-empty">
+            <div class="frame-corners" aria-hidden="true"></div>
+            <div class="upload-orbit">4K</div>
+            <h2>导入 3840 × 2160 背景图</h2>
+            <p>支持 PNG、JPG、WEBP；尺寸不符时不会载入</p>
+            <label class="btn primary large">选择背景图<input id="bgInput" type="file" accept="image/png,image/jpeg,image/webp" /></label>
+            <span>也可以将背景图拖放到这里</span>
+          </div>
+        </div>
+      </div>
+      <div class="stage-footer">
+        <span>坐标 <b id="pointerCoords">—, —</b></span>
+        <span>输出 <b>3840 × 2160 PNG</b></span>
+        <span>bbox <b>[x₁, y₁, x₂, y₂]</b></span>
+      </div>
+    </section>
+
+    <aside class="panel inspector-panel">
+      <div class="panel-head"><div><h2 id="inspectorTitle">物体属性</h2><p id="selectionHint">未选择物体</p></div></div>
+      <div id="backgroundInspector" class="inspector hidden">
+        <div class="mode-note">拖动画布移动背景，滚轮缩放背景。</div>
+        <div class="field-row">
+          <label class="field"><span>中心 X</span><input id="bgPosX" type="number" step="1" /></label>
+          <label class="field"><span>中心 Y</span><input id="bgPosY" type="number" step="1" /></label>
+        </div>
+        <label class="field full range-field"><span><b>背景缩放</b><output id="bgScaleOut">100%</output></span><input id="bgScale" type="range" min="10" max="500" value="100" /></label>
+        <div class="layer-actions">
+          <button id="bgZoomOutBtn">缩小背景</button><button id="bgZoomInBtn">放大背景</button>
+        </div>
+        <button class="btn secondary" id="resetBackgroundBtn">重置背景位置与缩放</button>
+      </div>
+      <div id="emptyInspector" class="inspector-empty"><div class="select-glyph">◇</div><p>选择画布中的物体以编辑位置、大小和旋转。</p></div>
+      <div id="inspector" class="inspector hidden">
+        <div id="boxFields" class="hidden">
+          <p class="panel-tip">拖动框内部移动；拖动四边/四角调整大小。只修改标注，不移动背景中的物体。</p>
+          <div class="field-row"><label class="field"><span>x1</span><input id="box0" type="number" step="any" /></label><label class="field"><span>y1</span><input id="box1" type="number" step="any" /></label></div>
+          <div class="field-row"><label class="field"><span>x2</span><input id="box2" type="number" step="any" /></label><label class="field"><span>y2</span><input id="box3" type="number" step="any" /></label></div>
+        </div>
+        <label class="field full"><span>object_id</span><input id="objectId" type="text" spellcheck="false" /></label>
+        <div class="field-row">
+          <label class="field"><span>X（中心）</span><input id="posX" type="number" step="1" /></label>
+          <label class="field"><span>Y（中心）</span><input id="posY" type="number" step="1" /></label>
+        </div>
+        <label class="field full range-field"><span><b>缩放</b><output id="scaleOut">100%</output></span><input id="scale" type="range" min="1" max="500" value="100" /></label>
+        <label class="field full range-field"><span><b>旋转</b><output id="rotationOut">0°</output></span><input id="rotation" type="range" min="-180" max="180" value="0" /></label>
+        <div class="bbox-card"><span>导出 bbox</span><code id="bboxValue">[0, 0, 0, 0]</code></div>
+        <div class="layer-actions">
+          <button id="backBtn">移至底层</button><button id="forwardBtn">移至顶层</button>
+        </div>
+        <div class="layer-actions">
+          <button id="duplicateBtn">复制</button><button id="deleteBtn" class="danger">删除</button>
+        </div>
+        <button id="centerObjectBtn" class="btn secondary">移回画布中心</button>
+      </div>
+
+      <div class="export-settings">
+        <div class="section-label">标注元数据</div>
+        <div id="importStatus" class="import-status">未导入原有 JSON</div>
+        <label class="btn secondary import-json" for="jsonInput">导入原有 JSON</label>
+        <label class="field"><span>JSON 导入方式（导入前选择）</span><select id="jsonImportMode"><option value="boxes" selected>标注框编辑 · 无需 PNG</option><option value="sprites">PNG 合成 · 匹配同名素材</option></select></label>
+        <p class="panel-tip">默认显示所有标注框和名称。编辑标注时锁定背景变换，保持原图坐标；可用顶部“视图”缩放查看。</p>
+        <label class="field full"><span>frame</span><input id="frameValue" type="number" value="0" step="1" min="0" /></label>
+        <div class="field-row three">
+          <label class="field"><span>pose.x</span><input id="poseX" type="number" value="0" step="any" /></label>
+          <label class="field"><span>pose.y</span><input id="poseY" type="number" value="0" step="any" /></label>
+          <label class="field"><span>pose.z</span><input id="poseZ" type="number" value="-600" step="any" /></label>
+        </div>
+        <label class="field full"><span>文件名</span><input id="exportName" type="text" value="sample_0000" spellcheck="false" /></label>
+        <button class="btn primary export-full" id="zipBtnSide" disabled>导出 PNG + JSON（ZIP）</button>
+        <p id="exportWarning" class="panel-tip" role="status"></p>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="sprite-box-calibration.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

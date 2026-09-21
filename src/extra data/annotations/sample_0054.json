@@ -1,0 +1,70 @@
+{
+  "frame": 0,
+  "pose": {
+    "x": 0,
+    "y": 0,
+    "z": -600
+  },
+  "annotations": [
+    {
+      "object_id": "helicopter",
+      "bbox": [
+        4,
+        1904,
+        92,
+        2014
+      ]
+    },
+    {
+      "object_id": "jet_plane",
+      "bbox": [
+        2421,
+        1574,
+        2487,
+        1642
+      ]
+    },
+    {
+      "object_id": "hangar",
+      "bbox": [
+        2378,
+        1428,
+        2488,
+        1608
+      ]
+    },
+    {
+      "object_id": "small_plane",
+      "bbox": [
+        2489,
+        1480,
+        2539,
+        1526
+      ]
+    },
+    {
+      "object_id": "small_plane",
+      "bbox": [
+        2576,
+        1549,
+        2626,
+        1595
+      ]
+    },
+    {
+      "object_id": "small_plane",
+      "bbox": [
+        2504,
+        1555,
+        2554,
+        1601
+      ]
+    }
+  ],
+  "object_counts": {
+    "hangar": 1,
+    "helicopter": 1,
+    "jet_plane": 1,
+    "small_plane": 3
+  }
+}

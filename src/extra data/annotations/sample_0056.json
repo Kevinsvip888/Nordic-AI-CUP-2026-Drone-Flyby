@@ -1,0 +1,151 @@
+{
+  "frame": 0,
+  "pose": {
+    "x": 0,
+    "y": 0,
+    "z": -600
+  },
+  "annotations": [
+    {
+      "object_id": "helicopter_1",
+      "bbox": [
+        1543,
+        856,
+        1644,
+        933
+      ]
+    },
+    {
+      "object_id": "jammer_1",
+      "bbox": [
+        943,
+        729,
+        972,
+        765
+      ]
+    },
+    {
+      "object_id": "tank",
+      "bbox": [
+        3435,
+        1213,
+        3472,
+        1247
+      ]
+    },
+    {
+      "object_id": "spacecraft",
+      "bbox": [
+        3593,
+        787,
+        3631,
+        828
+      ]
+    },
+    {
+      "object_id": "small_plane",
+      "bbox": [
+        1162,
+        1501,
+        1196,
+        1542
+      ]
+    },
+    {
+      "object_id": "large_launcher",
+      "bbox": [
+        202,
+        1215,
+        315,
+        1287
+      ]
+    },
+    {
+      "object_id": "condor",
+      "bbox": [
+        3520,
+        312,
+        3626,
+        409
+      ]
+    },
+    {
+      "object_id": "hangar",
+      "bbox": [
+        3374,
+        623,
+        3478,
+        799
+      ]
+    },
+    {
+      "object_id": "mine_roller",
+      "bbox": [
+        2209,
+        1275,
+        2256,
+        1330
+      ]
+    },
+    {
+      "object_id": "large_tower",
+      "bbox": [
+        2721,
+        1929,
+        2805,
+        2013
+      ]
+    },
+    {
+      "object_id": "small_tower",
+      "bbox": [
+        1180,
+        1915,
+        1244,
+        1979
+      ]
+    },
+    {
+      "object_id": "spacecraft",
+      "bbox": [
+        1334,
+        286,
+        1372,
+        327
+      ]
+    },
+    {
+      "object_id": "jet_plane",
+      "bbox": [
+        3466,
+        1907,
+        3512,
+        1958
+      ]
+    },
+    {
+      "object_id": "small_launcher",
+      "bbox": [
+        3197,
+        1707,
+        3206,
+        1720
+      ]
+    }
+  ],
+  "object_counts": {
+    "condor": 1,
+    "hangar": 1,
+    "helicopter_1": 1,
+    "jammer_1": 1,
+    "jet_plane": 1,
+    "large_launcher": 1,
+    "large_tower": 1,
+    "mine_roller": 1,
+    "small_launcher": 1,
+    "small_plane": 1,
+    "small_tower": 1,
+    "spacecraft": 2,
+    "tank": 1
+  }
+}

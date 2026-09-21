@@ -1,0 +1,18 @@
+.topbar{height:auto;min-height:72px;flex-wrap:wrap;gap:12px;padding:12px 20px}
+.top-actions{flex-wrap:wrap}
+body{display:flex;flex-direction:column}
+.workspace{height:auto;flex:1;min-height:0;grid-template-columns:230px minmax(0,1fr) 280px}
+.stage-wrap{grid-template-rows:auto minmax(0,1fr) 32px}
+.stage-toolbar{min-height:48px;flex-wrap:wrap;gap:8px;padding:8px}
+.status-group{flex-wrap:wrap;gap:6px}
+.stage-scroll{display:flex;align-items:flex-start;justify-content:flex-start}
+.canvas-shell{margin:auto}
+.frame-corners{pointer-events:none}
+.field span,.btn,.layer-actions button,.panel-head h2,.zoom-group button,.mode-switch button{font-size:14px}
+.panel-tip,.asset-name,.import-status{font-size:13px;overflow-wrap:anywhere}
+.field input:not([type=range]){font-size:14px}
+.assets-panel>.field{margin-top:16px}
+select{font:inherit;width:100%;padding:9px;background:#111824;color:var(--text);border:1px solid var(--line-2);border-radius:7px}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+@media(max-width:1050px){.top-actions .secondary,.top-actions .ghost{display:inline-block}}
+@media(max-width:800px){body{display:block;height:auto}.workspace{display:flex;min-height:0}.stage-wrap{height:65vh;min-height:360px}.topbar{position:static}.icon-btn{display:inline-block}}

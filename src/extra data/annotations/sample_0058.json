@@ -1,0 +1,142 @@
+{
+  "frame": 0,
+  "pose": {
+    "x": 0,
+    "y": 0,
+    "z": -600
+  },
+  "annotations": [
+    {
+      "object_id": "condor_1",
+      "bbox": [
+        1560,
+        1135,
+        1704,
+        1277
+      ]
+    },
+    {
+      "object_id": "helicopter",
+      "bbox": [
+        810,
+        1188,
+        930,
+        1314
+      ]
+    },
+    {
+      "object_id": "jammer_1",
+      "bbox": [
+        2895,
+        831,
+        2931,
+        873
+      ]
+    },
+    {
+      "object_id": "jet_plane",
+      "bbox": [
+        2886,
+        190,
+        2946,
+        254
+      ]
+    },
+    {
+      "object_id": "large_launcher_1",
+      "bbox": [
+        390,
+        1576,
+        522,
+        1688
+      ]
+    },
+    {
+      "object_id": "medium_launcher_1",
+      "bbox": [
+        1845,
+        1806,
+        1869,
+        1831
+      ]
+    },
+    {
+      "object_id": "medium_plane_1",
+      "bbox": [
+        560,
+        606,
+        610,
+        648
+      ]
+    },
+    {
+      "object_id": "mine_roller",
+      "bbox": [
+        634,
+        186,
+        681,
+        241
+      ]
+    },
+    {
+      "object_id": "small_launcher_1",
+      "bbox": [
+        719,
+        1743,
+        728,
+        1756
+      ]
+    },
+    {
+      "object_id": "ta-ta_2",
+      "bbox": [
+        2532,
+        1641,
+        2557,
+        1660
+      ]
+    },
+    {
+      "object_id": "ta-ta_1",
+      "bbox": [
+        2598,
+        1815,
+        2623,
+        1834
+      ]
+    },
+    {
+      "object_id": "tank_1",
+      "bbox": [
+        2703,
+        1150,
+        2740,
+        1184
+      ]
+    },
+    {
+      "object_id": "spacecraft_1",
+      "bbox": [
+        3629,
+        265,
+        3667,
+        306
+      ]
+    }
+  ],
+  "object_counts": {
+    "condor_1": 1,
+    "helicopter": 1,
+    "jammer_1": 1,
+    "jet_plane": 1,
+    "large_launcher_1": 1,
+    "medium_launcher_1": 1,
+    "medium_plane_1": 1,
+    "mine_roller": 1,
+    "small_launcher_1": 1,
+    "spacecraft_1": 1,
+    "ta-ta_1": 1,
+    "ta-ta_2": 1,
+    "tank_1": 1
+  }
+}
